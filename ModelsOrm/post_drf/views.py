@@ -72,11 +72,21 @@ class UserSecondDetailView(
     mixins.UpdateModelMixin,
     generics.GenericAPIView
     ):
+    queryset = Users.objects.all()
+    serializer_class = UserSerializer
     def get(self,request,*args,**kwargs):
         return self.retrieve(request,*args,**kwargs)
     
     def patch(self,request,*args,**kwargs):
-        return self.update(request, *args, **kwargs)
+        return self.partial_update(request, *args, **kwargs)
     
     def delete(self,request, *args,**kwargs):
         return self.destroy(request,*args,**kwargs)
+    
+class UserOne(generics.ListCreateAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UserSerializer
+
+class UserById(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UserSerializer
