@@ -19,25 +19,26 @@ class UserSerializer(serializers.ModelSerializer):
             )
         ]
 
-class PostsSerializer(serializers.ModelSerializer):
-    author_username = serializers.CharField(source='users.name')
-
-    class Meta:
-        model = Posts
-        fields = [
-            'comment_text',
-            'timestamp',
-            'author_username'
-        ]
-
 class CommentsSerializer(serializers.ModelSerializer):
-    author_username = serializers.CharField(source='users.name')
+    # author_username = serializers.CharField(source='users.username')
 
     class Meta:
         model = Comments
         fields = [
+            'comment_text',
+            'timestamp',
+            'author'
+        ]
+
+class PostsSerializer(serializers.ModelSerializer):
+    # author_username = serializers.CharField(source='users.username')
+
+    class Meta:
+        model = Posts
+        fields = [
+            'id',
             'captian',
             'likes',
-            'author_username'
+            'author'
         ]
 

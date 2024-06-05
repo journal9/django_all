@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework import status
 from django.http import Http404
 from .serializers import UserSerializer, PostsSerializer, CommentsSerializer
-from .models import Users,Posts
+from .models import Users,Posts,Comments
 
 # Create your views here.
 
@@ -90,3 +90,38 @@ class UserOne(generics.ListCreateAPIView):
 class UserById(generics.RetrieveUpdateDestroyAPIView):
     queryset = Users.objects.all()
     serializer_class = UserSerializer
+
+class PostsView(APIView):
+
+    def post(self,request):
+        post_data = request.data
+        # user_id = post_data.get('id')
+        # author = Users.objects.get(id=user_id)
+        # post_data['author'] = author
+        input_data = PostsSerializer(data=post_data)
+        if input_data.is_valid():
+            input_data.save()
+            return Response(input_data.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(input_data.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+    def get(self,request):
+        all_posts = Posts.objects.all()
+        serialized_posts = PostsSerializer(all_posts,many=True)
+        return Response(serialized_posts.data)
+    
+class CommentsView(APIView):
+
+    def post(self,request):
+        comment_data = request.data
+        post_id = comment_data.get('post_id')
+        author_id = comment_data.get('author')
+        post = Posts.objects.get(id=post_id)
+        author = Users.objects.get(id=author_id)
+        Comments.objects.create(comment_text=comment_data.get('text'),author=author,content_object=post)
+        return Response(status=status.HTTP_201_CREATED)
+        
+    def get(slef,request):
+        all_comments = Comments.objects.all()
+        serialized_cm = CommentsSerializer(all_comments,many=True)
+        return Response(serialized_cm.data)
