@@ -1,9 +1,11 @@
+from django.conf import settings
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import status
+from .pagination import LargeResultsSetPagination
 from django.http import Http404
 from .serializers import UserSerializer, PostsSerializer, CommentsSerializer
 from .models import Users,Posts,Comments
@@ -86,6 +88,7 @@ class UserSecondDetailView(
 class UserOne(generics.ListCreateAPIView):
     queryset = Users.objects.all()
     serializer_class = UserSerializer
+    # pagination_class = LargeResultsSetPagination
 
 class UserById(generics.RetrieveUpdateDestroyAPIView):
     queryset = Users.objects.all()
