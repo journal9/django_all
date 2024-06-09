@@ -8,7 +8,7 @@ class Info(models.Model):
     contact = models.CharField(max_length=50)
     Intro= models.CharField(max_length=100)
 
-class Clients(models.Model):
+class Clientsz(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=50)
