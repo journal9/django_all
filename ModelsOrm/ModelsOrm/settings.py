@@ -37,18 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'rest_framework.authtoken',
     'data1',
     'post_drf',
-    'BasicAuth'
+    'BasicAuth',
+    'TokenAuth'
 ]
-CORS_ORIGIN_WHITELIST = []
-
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_ALLOW_ALL=True
-
-CSRF_TRUSTED_ORIGINS = []
+# CORS_ORIGIN_WHITELIST = []
+# CORS_ORIGIN_ALLOW_ALL=True
+# CSRF_TRUSTED_ORIGINS = []
+# CORS_ALLOWED_ORIGINS = []  #this was giving some error
+# CORS_ALLOW_CREDENTIALS = True # this too
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,9 +81,10 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    ),
+    ],
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'

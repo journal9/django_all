@@ -21,10 +21,10 @@ class UserLogin(APIView):
         username = request.data['name']
         password = request.data['password']
         user = authenticate(request,username=username,password=password)
-        print(request.user)
         if user:
             login(request,user)
             print(request.user)
+            print(request.auth)
             # request.session['username'] = username
             # request.session.save()
         else:
@@ -52,3 +52,11 @@ class ClientsDetail(generics.RetrieveUpdateDestroyAPIView):
 class GetAllClients(generics.ListAPIView):
     queryset = Clientsz.objects.all()
     serializer_class = ClientsSerializer
+
+# class GetAllClients(APIView):
+
+#     def get(self,request):
+#         print(request.user)
+#         queryset = Clientsz.objects.all()
+#         serializer_data = ClientsSerializer(queryset,many = True)
+#         return Response(serializer_data.data,status=status.HTTP_200_OK)

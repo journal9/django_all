@@ -6,5 +6,5 @@ urlpatterns = [
     path('logout',LogoutUser.as_view()),
     path('client',Clients.as_view()),
     path('clients',GetAllClients.as_view()),
-    path('clients/<int:id>',ClientsDetail.as_view()),
+    path('clients/<int:pk>',ClientsDetail.as_view()),
 ]

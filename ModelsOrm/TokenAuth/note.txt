@@ -1,0 +1,4 @@
+Token authentication is appropriate for client-server setups, such as native desktop and mobile clients.
+
+
+1. Firstly, include rest_framework.authtoken in your INSTALLED_APPS settingrest_framework.authtoken in your INSTALLED_APPS setting
