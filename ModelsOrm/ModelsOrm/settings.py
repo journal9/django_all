@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
 # Application definition
 
@@ -38,17 +43,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
     'data1',
     'post_drf',
     'BasicAuth',
-    'TokenAuth'
+    # 'TokenAuth',
+    'SessionAuth'
 ]
-# CORS_ORIGIN_WHITELIST = []
-# CORS_ORIGIN_ALLOW_ALL=True
-# CSRF_TRUSTED_ORIGINS = []
-# CORS_ALLOWED_ORIGINS = []  #this was giving some error
-# CORS_ALLOW_CREDENTIALS = True # this too
+
+CORS_ORIGIN_WHITELIST = []
+CORS_ORIGIN_ALLOW_ALL=True
+CSRF_TRUSTED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = []  #this was giving some error
+CORS_ALLOW_CREDENTIALS = True # this too
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,9 +89,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     # 'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ],
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'

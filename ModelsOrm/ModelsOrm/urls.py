@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/', include('data1.urls')),
     path('social/', include('post_drf.urls')),
     path('auth/', include('BasicAuth.urls')),
-    path('tk/', include('TokenAuth.urls'))
+    # path('tk/', include('TokenAuth.urls')),
+    path('sess/', include('SessionAuth.urls'))
 ]
