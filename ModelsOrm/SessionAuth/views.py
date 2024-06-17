@@ -45,5 +45,3 @@ class InternDetail(generics.RetrieveUpdateDestroyAPIView):
 class GetAllInterns(generics.ListAPIView):
     queryset = Interns.objects.all()
     serializer_class = InternsSerializer
-
-# Create your views here.

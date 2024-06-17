@@ -23,5 +23,7 @@ urlpatterns = [
     path('social/', include('post_drf.urls')),
     path('auth/', include('BasicAuth.urls')),
     # path('tk/', include('TokenAuth.urls')),
-    path('sess/', include('SessionAuth.urls'))
+    path('sess/', include('SessionAuth.urls')),
+    path('oauth/', include('OAuth.urls')),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
