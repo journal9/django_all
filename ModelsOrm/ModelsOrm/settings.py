@@ -48,9 +48,10 @@ INSTALLED_APPS = [
     'data1',
     'post_drf',
     'BasicAuth',
-    # 'TokenAuth',
+    'TokenAuth',
     'SessionAuth',
-    'OAuth'
+    'OAuth',
+    'jwtToken'
 ]
 
 CORS_ORIGIN_WHITELIST = []
@@ -96,7 +97,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.SessionAuthentication',
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', 
     ],
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #     # 'rest_framework.authentication.BasicAuthentication',
